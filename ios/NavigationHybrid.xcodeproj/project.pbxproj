@@ -32,6 +32,8 @@
 		91C884A5202C3E8600EC0A20 /* HBDTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C884A0202C3E8600EC0A20 /* HBDTabBarController.m */; };
 		91C884A6202C3E8600EC0A20 /* HBDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C884A1202C3E8600EC0A20 /* HBDUtils.m */; };
 		91C884A9202C3F9200EC0A20 /* GlobalStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C884A8202C3F9200EC0A20 /* GlobalStyle.m */; };
+		91CF4EAB235DAFB8002949AC /* HBDPushAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CF4EA9235DAFB8002949AC /* HBDPushAnimation.m */; };
+		91CF4EAC235DAFB8002949AC /* HBDPopAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CF4EAA235DAFB8002949AC /* HBDPopAnimation.m */; };
 		91DCF5C420BF034600520342 /* HBDRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DCF5C320BF034600520342 /* HBDRootView.m */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +103,10 @@
 		91C884A2202C3E8600EC0A20 /* HBDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBDUtils.h; sourceTree = "<group>"; };
 		91C884A7202C3F9200EC0A20 /* GlobalStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalStyle.h; sourceTree = "<group>"; };
 		91C884A8202C3F9200EC0A20 /* GlobalStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalStyle.m; sourceTree = "<group>"; };
+		91CF4EA7235DAFB8002949AC /* HBDPushAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBDPushAnimation.h; sourceTree = "<group>"; };
+		91CF4EA8235DAFB8002949AC /* HBDPopAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBDPopAnimation.h; sourceTree = "<group>"; };
+		91CF4EA9235DAFB8002949AC /* HBDPushAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBDPushAnimation.m; sourceTree = "<group>"; };
+		91CF4EAA235DAFB8002949AC /* HBDPopAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBDPopAnimation.m; sourceTree = "<group>"; };
 		91DCF5C220BF034600520342 /* HBDRootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBDRootView.h; sourceTree = "<group>"; };
 		91DCF5C320BF034600520342 /* HBDRootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBDRootView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +186,10 @@
 		9113EC092126DFAA00B35D06 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				91CF4EA8235DAFB8002949AC /* HBDPopAnimation.h */,
+				91CF4EAA235DAFB8002949AC /* HBDPopAnimation.m */,
+				91CF4EA7235DAFB8002949AC /* HBDPushAnimation.h */,
+				91CF4EA9235DAFB8002949AC /* HBDPushAnimation.m */,
 				91C8849B202C3E8600EC0A20 /* HBDDrawerController.h */,
 				91C8849D202C3E8600EC0A20 /* HBDDrawerController.m */,
 				91C8849F202C3E8600EC0A20 /* HBDTabBarController.h */,
@@ -277,7 +287,9 @@
 				913386D321E8D6A900342AE8 /* HBDReactTabBar.m in Sources */,
 				910BA6EC204E8157004CB741 /* HBDTitleView.m in Sources */,
 				91C884A6202C3E8600EC0A20 /* HBDUtils.m in Sources */,
+				91CF4EAB235DAFB8002949AC /* HBDPushAnimation.m in Sources */,
 				91C884A3202C3E8600EC0A20 /* HBDDrawerController.m in Sources */,
+				91CF4EAC235DAFB8002949AC /* HBDPopAnimation.m in Sources */,
 				910362F51FE931E000F4DA8E /* HBDReactBridgeManager.m in Sources */,
 				91608F3F20E526ED00D11D9F /* HBDScreenNavigator.m in Sources */,
 				910362F11FE931E000F4DA8E /* HBDGarden.m in Sources */,
