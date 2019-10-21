@@ -90,6 +90,10 @@
 }
 
 - (void)hbd_setNeedsStatusBarHiddenUpdate {
+    if (@available(iOS 13.0, *)) {
+        [self setNeedsStatusBarAppearanceUpdate];
+        return;
+    }
     
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = keyWindow.rootViewController;
@@ -112,12 +116,11 @@
         vc = self;
     }
     
-    [self hbd_setStatusBarHidden:vc.hbd_statusBarHidden forViewController:vc];
+    [self hbd_setStatusBarHidden:vc.hbd_statusBarHidden && !self.hbd_inCall forViewController:vc];
 }
 
 - (void)hbd_setStatusBarHidden:(BOOL)hidden forViewController:(UIViewController *)vc {
-    hidden = hidden && !self.hbd_inCall;
-    UIWindow *statusBar = [[UIApplication sharedApplication] valueForKey:@"statusBarWindow"];
+    UIView *statusBar = [[UIApplication sharedApplication] valueForKey:@"statusBarWindow"];
     if (!statusBar) {
         return;
     }
