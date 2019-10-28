@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
-import android.util.Log;
+
+import com.facebook.common.logging.FLog;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -71,7 +72,7 @@ public class ReactBridgeManager {
     private void setup() {
         final ReactInstanceManager reactInstanceManager = getReactInstanceManager();
         reactInstanceManager.addReactInstanceEventListener(context -> {
-            Log.i(TAG, "react instance context initialized.");
+            FLog.i(TAG, "react instance context initialized.");
             rootLayout = null;
             rootLayoutTag = 0;
             stickyLayout = null;
@@ -80,7 +81,7 @@ public class ReactBridgeManager {
         });
 
         if (!reactInstanceManager.hasStartedCreatingInitialContext()) {
-            Log.i(TAG, "create react context");
+            FLog.i(TAG, "create react context");
             reactInstanceManager.createReactContextInBackground();
         }
     }
@@ -151,7 +152,7 @@ public class ReactBridgeManager {
 
     public void endRegisterReactModule() {
         setReactModuleRegisterCompleted(true);
-        Log.i(TAG, "react module registry completed");
+        FLog.i(TAG, "react module registry completed");
         for (ReactModuleRegisterListener listener : reactModuleRegisterListeners) {
             listener.onReactModuleRegisterCompleted();
         }
@@ -172,15 +173,11 @@ public class ReactBridgeManager {
 
         rootLayout = root;
 
-        if (pendingLayout == null && rootLayoutTag != 0) {
+        if (pendingLayout != null || rootLayoutTag == 0) {
+            rootLayoutTag = tag;
+        } else {
             throw new IllegalStateException("unbalance call `getAndResetRootLayoutTag` and `setRoot`");
         }
-
-        if (pendingLayout != null) {
-            pendingLayout = null;
-        }
-
-        rootLayoutTag = tag;
     }
 
     @Nullable

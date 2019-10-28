@@ -10,7 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
+
+import com.facebook.common.logging.FLog;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -53,7 +54,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
     @Override
     public void onCatalystInstanceDestroy() {
         super.onCatalystInstanceDestroy();
-        Log.i(TAG, "NavigationModule#onCatalystInstanceDestroy");
+        FLog.i(TAG, "NavigationModule#onCatalystInstanceDestroy");
         LocalBroadcastManager.getInstance(getReactApplicationContext().getApplicationContext()).sendBroadcast(new Intent(Constants.INTENT_RELOAD_JS_BUNDLE));
         sHandler.removeCallbacksAndMessages(null);
         sHandler.post(() -> {
@@ -106,7 +107,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
     public void setRoot(final ReadableMap layout, final boolean sticky, final int tag) {
         sHandler.post(() -> {
             if (bridgeManager.getCurrentReactContext() == null) {
-                Log.w(TAG, "current react context is null, skip action `setRoot`");
+                FLog.w(TAG, "current react context is null, skip action `setRoot`");
                 return;
             }
 
@@ -116,12 +117,13 @@ public class NavigationModule extends ReactContextBaseJavaModule {
             if (activity instanceof ReactAppCompatActivity && bridgeManager.isReactModuleRegisterCompleted()) {
                 ReactAppCompatActivity reactAppCompatActivity = (ReactAppCompatActivity) activity;
                 AwesomeFragment fragment = bridgeManager.createFragment(layout);
+                bridgeManager.setPendingLayout(null);
                 if (fragment != null) {
-                    Log.i(TAG, "have active activity and react module was registered, set root directly");
+                    FLog.i(TAG, "have active activity and react module was registered, set root directly");
                     reactAppCompatActivity.setActivityRootFragment(fragment);
                 }
             } else {
-                Log.w(TAG, "have no active activity or react module was not registered, schedule pending root");
+                FLog.w(TAG, "have no active activity or react module was not registered, schedule pending root");
                 bridgeManager.setPendingLayout(layout);
             }
         });
@@ -134,7 +136,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
             if (target != null && target.isAdded()) {
                 bridgeManager.handleNavigation(target, action, extras);
             } else {
-                Log.w(TAG, "Can't find target scene for action:" + action + ", maybe the scene is gone.\nextras: " + extras);
+                FLog.w(TAG, "Can't find target scene for action:" + action + ", maybe the scene is gone.\nextras: " + extras);
             }
         });
     }
@@ -157,7 +159,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 if (bridgeManager.getCurrentReactContext() == null) {
-                    Log.w(TAG, "current react context is null, skip action `currentRoute`");
+                    FLog.w(TAG, "current react context is null, skip action `currentRoute`");
                     return;
                 }
 
@@ -202,7 +204,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 if (bridgeManager.getCurrentReactContext() == null) {
-                    Log.w(TAG, "current react context is null, skip action `currentRoute`");
+                    FLog.w(TAG, "current react context is null, skip action `currentRoute`");
                     return;
                 }
 
@@ -246,7 +248,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 if (bridgeManager.getCurrentReactContext() == null) {
-                    Log.w(TAG, "current react context is null, skip action `routeGraph`");
+                    FLog.w(TAG, "current react context is null, skip action `routeGraph`");
                     return;
                 }
 
@@ -285,7 +287,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
 
     private AwesomeFragment findFragmentBySceneId(String sceneId) {
         if (!bridgeManager.isViewHierarchyReady() || bridgeManager.getCurrentReactContext() == null) {
-            Log.w(TAG, "View hierarchy is not ready now.");
+            FLog.w(TAG, "View hierarchy is not ready now.");
             return null;
         }
 

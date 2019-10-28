@@ -2,6 +2,7 @@ package com.navigationhybrid.playground;
 
 import android.support.multidex.MultiDexApplication;
 
+import com.facebook.common.logging.FLog;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -75,6 +76,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         bridgeManager.setMemoryWatcher(object -> refWatcher.watch(object));
 
         DraweeView.setGlobalLegacyVisibilityHandlingEnabled(true);
+        FLog.setMinimumLoggingLevel(FLog.INFO);
     }
 
     private RefWatcher refWatcher;
