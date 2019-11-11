@@ -118,6 +118,13 @@ public class ReactFragment extends HybridFragment implements ReactRootViewHolder
         if (reactRootViewHolder != null) {
             reactRootViewHolder.setVisibilityObserver(null);
         }
+        // unmountReactView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // unmount react view delay for better transition
         unmountReactView();
     }
 
