@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, Text, View, ScrollView, Platform } from 'react-native';
-import { BarStyleLightContent } from 'react-native-navigation-hybrid';
-import { createStore } from 'redux';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { TouchableOpacity, Text, View, ScrollView, Platform } from 'react-native'
+import { BarStyleLightContent } from 'react-native-navigation-hybrid'
+import { createStore } from 'redux'
+import { connect } from 'react-redux'
 
-import styles, { paddingTop } from './Styles';
-import fontUri from './FontUtil';
+import styles, { paddingTop } from './Styles'
+import fontUri from './FontUtil'
 
 // React component
 class ReduxCounter extends Component {
@@ -30,32 +30,31 @@ class ReduxCounter extends Component {
       icon: { uri: fontUri('FontAwesome', 'minus', 24) },
       title: 'MINUS',
       action: navigator => {
-        navigator.state.params.onDecreaseClick();
+        navigator.state.params.onDecreaseClick()
       },
     },
-  };
+  }
 
   componentDidAppear() {
-    console.info('ReduxCounter componentDidAppear');
+    console.info('ReduxCounter componentDidAppear')
   }
 
   componentDidDisappear() {
-    console.info('ReduxCounter componentDidDisappear');
+    console.info('ReduxCounter componentDidDisappear')
   }
 
   componentWillMount() {
-    const { navigator, onDecreaseClick } = this.props;
-    navigator.setParams({ onDecreaseClick });
+    const { navigator, onDecreaseClick } = this.props
+    navigator.setParams({ onDecreaseClick })
   }
 
   render() {
-    const { value, onIncreaseClick } = this.props;
+    const { value, onIncreaseClick } = this.props
     return (
       <ScrollView
         contentInsetAdjustmentBehavior="never"
         automaticallyAdjustContentInsets={false}
-        contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
-      >
+        contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}>
         <View style={[styles.container, paddingTop]}>
           <Text style={styles.welcome}>{value}</Text>
 
@@ -64,35 +63,35 @@ class ReduxCounter extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    );
+    )
   }
 }
 
 // Action
-const increaseAction = { type: 'increase' };
-const decreaseAction = { type: 'decrease' };
+const increaseAction = { type: 'increase' }
+const decreaseAction = { type: 'decrease' }
 
 // Reducer
 function counter(state = { count: 0 }, action) {
-  const count = state.count;
+  const count = state.count
   switch (action.type) {
     case 'increase':
-      return { count: count + 1 };
+      return { count: count + 1 }
     case 'decrease':
-      return { count: count - 1 };
+      return { count: count - 1 }
     default:
-      return state;
+      return state
   }
 }
 
 // Store
-const store = createStore(counter);
+const store = createStore(counter)
 
 // Map Redux state to component props
 function mapStateToProps(state) {
   return {
     value: state.count,
-  };
+  }
 }
 
 // Map Redux actions to component props
@@ -100,7 +99,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onIncreaseClick: () => dispatch(increaseAction),
     onDecreaseClick: () => dispatch(decreaseAction),
-  };
+  }
 }
 
 // Connected Component
@@ -108,7 +107,7 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
   undefined,
-  { forwardRef: true } // 注意这行代码，开启引用转发功能
-)(ReduxCounter);
+  { forwardRef: true }, // 注意这行代码，开启引用转发功能
+)(ReduxCounter)
 
-export { store };
+export { store }

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Alert, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { LayoutFittingExpanded } from 'react-native-navigation-hybrid';
-import styles from './Styles';
+import React, { Component } from 'react'
+import { Text, View, TouchableOpacity, ScrollView, Alert, Image } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { LayoutFittingExpanded } from 'react-native-navigation-hybrid'
+import styles from './Styles'
 
 function CustomTitleView(props) {
-  let { params } = props.navigator.state;
+  let { params } = props.navigator.state
   return (
     <View
       style={{
@@ -13,8 +13,7 @@ function CustomTitleView(props) {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-      }}
-    >
+      }}>
       <Text style={styles.welcome}>--Custom Title--</Text>
       <Icon.Button
         name="facebook"
@@ -22,10 +21,10 @@ function CustomTitleView(props) {
         onPress={params.onFackbookButtonClick}
       />
     </View>
-  );
+  )
 }
 
-export { CustomTitleView };
+export { CustomTitleView }
 
 export default class TopBarTitleView extends Component {
   static navigationItem = {
@@ -34,14 +33,14 @@ export default class TopBarTitleView extends Component {
       moduleName: 'CustomTitleView', // registered component name
       layoutFitting: LayoutFittingExpanded, // `LayoutFittingExpanded` or `LayoutFittingCompressed`, default is `LayoutFittingExpanded`
     },
-  };
+  }
 
   constructor(props) {
-    super(props);
-    this.topBarTitleView = this.topBarTitleView.bind(this);
+    super(props)
+    this.topBarTitleView = this.topBarTitleView.bind(this)
     this.props.navigator.setParams({
       onFackbookButtonClick: this.onFackbookButtonClick.bind(this),
-    });
+    })
   }
 
   onFackbookButtonClick() {
@@ -49,12 +48,12 @@ export default class TopBarTitleView extends Component {
       'Hello!',
       'Fackbook button is clicked.',
       [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-      { cancelable: false }
-    );
+      { cancelable: false },
+    )
   }
 
   topBarTitleView() {
-    this.props.navigator.push('TopBarTitleView');
+    this.props.navigator.push('TopBarTitleView')
   }
 
   render() {
@@ -62,20 +61,18 @@ export default class TopBarTitleView extends Component {
       <ScrollView
         contentInsetAdjustmentBehavior="never"
         automaticallyAdjustContentInsets={false}
-        contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
-      >
+        contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}>
         <View style={styles.container}>
           <Text style={styles.welcome}> Custom title bar </Text>
 
           <TouchableOpacity
             onPress={this.topBarTitleView}
             activeOpacity={0.2}
-            style={styles.button}
-          >
+            style={styles.button}>
             <Text style={styles.buttonText}>TopBarTitleView</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
-    );
+    )
   }
 }

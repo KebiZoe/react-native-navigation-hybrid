@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, Text, View, ScrollView, PixelRatio, Platform } from 'react-native';
+import React, { Component } from 'react'
+import { TouchableOpacity, Text, View, ScrollView, PixelRatio, Platform } from 'react-native'
 
-import styles from './Styles';
-import { RESULT_OK, Navigator } from 'react-native-navigation-hybrid';
-import fontUri from './FontUtil';
+import styles from './Styles'
+import { RESULT_OK, Navigator } from 'react-native-navigation-hybrid'
+import fontUri from './FontUtil'
 
-const REQUEST_CODE = 1;
+const REQUEST_CODE = 1
 
 export default class Navigation extends Component {
   static navigationItem = {
@@ -22,101 +22,101 @@ export default class Navigation extends Component {
       icon: { uri: fontUri('FontAwesome', 'location-arrow', 24) },
       hideTabBarWhenPush: true,
     },
-  };
+  }
 
   constructor(props) {
-    super(props);
-    this.push = this.push.bind(this);
-    this.pop = this.pop.bind(this);
-    this.popTo = this.popTo.bind(this);
-    this.popToRoot = this.popToRoot.bind(this);
-    this.replace = this.replace.bind(this);
-    this.replaceToRoot = this.replaceToRoot.bind(this);
-    this.present = this.present.bind(this);
-    this.switchTab = this.switchTab.bind(this);
-    this.showModal = this.showModal.bind(this);
-    this.showNativeModal = this.showNativeModal.bind(this);
+    super(props)
+    this.push = this.push.bind(this)
+    this.pop = this.pop.bind(this)
+    this.popTo = this.popTo.bind(this)
+    this.popToRoot = this.popToRoot.bind(this)
+    this.replace = this.replace.bind(this)
+    this.replaceToRoot = this.replaceToRoot.bind(this)
+    this.present = this.present.bind(this)
+    this.switchTab = this.switchTab.bind(this)
+    this.showModal = this.showModal.bind(this)
+    this.showNativeModal = this.showNativeModal.bind(this)
     this.state = {
       text: undefined,
       backId: undefined,
       error: undefined,
       isRoot: false,
-    };
+    }
   }
 
   componentDidAppear() {
     this.props.navigator.isStackRoot().then(isRoot => {
-      this.props.garden.setMenuInteractive(isRoot);
-    });
-    console.info('navigation componentDidAppear');
+      this.props.garden.setMenuInteractive(isRoot)
+    })
+    console.info('navigation componentDidAppear')
   }
 
   componentDidDisappear() {
-    this.props.garden.setMenuInteractive(false);
-    console.info('navigation componentDidDisappear');
+    this.props.garden.setMenuInteractive(false)
+    console.info('navigation componentDidDisappear')
   }
 
   componentDidMount() {
-    console.info('navigation componentDidMount');
+    console.info('navigation componentDidMount')
     this.props.navigator.isStackRoot().then(isRoot => {
       if (isRoot) {
-        this.setState({ isRoot });
+        this.setState({ isRoot })
       }
-    });
-    this.props.navigator.setResult(RESULT_OK, { backId: this.props.sceneId });
+    })
+    this.props.navigator.setResult(RESULT_OK, { backId: this.props.sceneId })
   }
 
   componentWillUnmount() {
-    console.info('navigation componentWillUnmount');
+    console.info('navigation componentWillUnmount')
   }
 
   onComponentResult(requestCode, resultCode, data) {
-    console.info('navigation onComponentResult', data);
+    console.info('navigation onComponentResult', data)
   }
 
   async push() {
-    let props = {};
+    let props = {}
     if (!this.state.isRoot) {
       if (this.props.popToId !== undefined) {
-        props.popToId = this.props.popToId;
+        props.popToId = this.props.popToId
       } else {
-        props.popToId = this.props.sceneId;
+        props.popToId = this.props.sceneId
       }
     }
-    const [resultCode, data] = await this.props.navigator.push('Navigation', props);
+    const [resultCode, data] = await this.props.navigator.push('Navigation', props)
     if (data) {
-      this.setState({ text: data.backId || undefined });
+      this.setState({ text: data.backId || undefined })
     }
   }
 
   pop() {
-    this.props.navigator.pop();
+    this.props.navigator.pop()
   }
 
   popTo() {
-    this.props.navigator.popTo(this.props.popToId);
+    this.props.navigator.popTo(this.props.popToId)
   }
 
   popToRoot() {
-    this.props.navigator.popToRoot();
+    this.props.navigator.popToRoot()
   }
 
   replace() {
     if (this.props.popToId !== undefined) {
       this.props.navigator.replace('Navigation', {
         popToId: this.props.popToId,
-      });
+      })
     } else {
-      this.props.navigator.replace('Navigation');
+      this.props.navigator.replace('Navigation')
     }
   }
 
   replaceToRoot() {
-    this.props.navigator.replaceToRoot('Navigation');
+    this.props.navigator.replaceToRoot('Navigation')
   }
 
   switchTab() {
-    this.props.navigator.switchTab(1);
+    this.props.navigator.switchTab(1)
   }
 
   handleResult(resultCode, data) {
@@ -124,25 +124,25 @@ export default class Navigation extends Component {
       this.setState({
         text: data.text,
         error: undefined,
-      });
+      })
     } else {
-      this.setState({ text: undefined, error: 'ACTION CANCEL' });
+      this.setState({ text: undefined, error: 'ACTION CANCEL' })
     }
   }
 
   async present() {
-    const [resultCode, data] = await this.props.navigator.present('Result', REQUEST_CODE);
-    this.handleResult(resultCode, data);
+    const [resultCode, data] = await this.props.navigator.present('Result', REQUEST_CODE)
+    this.handleResult(resultCode, data)
   }
 
   async showModal() {
-    const [resultCode, data] = await this.props.navigator.showModal('ReactModal', REQUEST_CODE);
-    this.handleResult(resultCode, data);
+    const [resultCode, data] = await this.props.navigator.showModal('ReactModal', REQUEST_CODE)
+    this.handleResult(resultCode, data)
   }
 
   async showNativeModal() {
-    const [resultCode, data] = await this.props.navigator.showModal('NativeModal', REQUEST_CODE);
-    this.handleResult(resultCode, data);
+    const [resultCode, data] = await this.props.navigator.showModal('NativeModal', REQUEST_CODE)
+    this.handleResult(resultCode, data)
   }
 
   render() {
@@ -150,8 +150,7 @@ export default class Navigation extends Component {
       <ScrollView
         contentInsetAdjustmentBehavior="never"
         automaticallyAdjustContentInsets={false}
-        contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
-      >
+        contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}>
         <View style={styles.container}>
           <Text style={styles.welcome}>This's a React Native scene.</Text>
 
@@ -159,17 +158,25 @@ export default class Navigation extends Component {
             <Text style={styles.buttonText}>push</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.pop} activeOpacity={0.2} style={styles.button} disabled={this.state.isRoot}>
-            <Text style={this.state.isRoot ? styles.buttonTextDisable : styles.buttonText}>pop</Text>
+          <TouchableOpacity
+            onPress={this.pop}
+            activeOpacity={0.2}
+            style={styles.button}
+            disabled={this.state.isRoot}>
+            <Text style={this.state.isRoot ? styles.buttonTextDisable : styles.buttonText}>
+              pop
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={this.popTo}
             activeOpacity={0.2}
             style={styles.button}
-            disabled={this.props.popToId == undefined}
-          >
-            <Text style={this.props.popToId == undefined ? styles.buttonTextDisable : styles.buttonText}>
+            disabled={this.props.popToId === undefined}>
+            <Text
+              style={
+                this.props.popToId === undefined ? styles.buttonTextDisable : styles.buttonText
+              }>
               popTo last but one
             </Text>
           </TouchableOpacity>
@@ -178,9 +185,10 @@ export default class Navigation extends Component {
             onPress={this.popToRoot}
             activeOpacity={0.2}
             style={styles.button}
-            disabled={this.state.isRoot}
-          >
-            <Text style={this.state.isRoot ? styles.buttonTextDisable : styles.buttonText}>popToRoot</Text>
+            disabled={this.state.isRoot}>
+            <Text style={this.state.isRoot ? styles.buttonTextDisable : styles.buttonText}>
+              popToRoot
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={this.replace} activeOpacity={0.2} style={styles.button}>
@@ -203,7 +211,10 @@ export default class Navigation extends Component {
             <Text style={styles.buttonText}>show react modal</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.showNativeModal} activeOpacity={0.2} style={styles.button}>
+          <TouchableOpacity
+            onPress={this.showNativeModal}
+            activeOpacity={0.2}
+            style={styles.button}>
             <Text style={styles.buttonText}>show native modal</Text>
           </TouchableOpacity>
 
@@ -217,6 +228,6 @@ export default class Navigation extends Component {
           {this.state.error !== undefined && <Text style={styles.result}>{this.state.error}</Text>}
         </View>
       </ScrollView>
-    );
+    )
   }
 }

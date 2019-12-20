@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/listenzz/react-native-navigation-hybrid.git"
   },
-  "version": "0.16.13",
+  "version": "0.16.14",
   "nativePackage": true,
   "description": "Native navigation library for ReactNative, support navigating between native and ReactNative seamlessly.",
   "author": "listen <listenzz@163.com>",
@@ -25,7 +25,7 @@
     "tsc": "tsc",
     "start": "npm run syncbv && node node_modules/react-native/local-cli/cli.js start",
     "run:ios": "react-native run-ios --project-path ./playground/ios",
-    "start:android": "adb shell am start -n com.navigationhybrid.playground/.SplashActivity",
+    "start:android": "adb shell am start -n com.navigationhybrid.playground/.MainActivity",
     "run:android": "cd playground/android && ./gradlew installDebug && npm run start:android",
     "test": "jest",
     "syncbv": "node scripts/sync-build-version.js"
@@ -35,17 +35,18 @@
     "react-native": ">=0.57.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/runtime": "^7.3.4",
+    "@babel/core": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "@react-native-community/eslint-config": "0.0.5",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.8.8",
     "@types/react-native": "^0.57.40",
     "@types/react-test-renderer": "^16.8.1",
     "babel-jest": "^24.5.0",
+    "eslint": "5.16.0",
+    "eslint-config-prettier": "^6.5.0",
     "jest": "^24.5.0",
     "metro-react-native-babel-preset": "^0.53.0",
-    "react-test-renderer": "16.8.3",
-    "typescript": "^3.5.1",
     "react": "16.8.3",
     "react-native": "0.59.10",
     "react-native-hud-hybrid": "0.42.0",
@@ -53,7 +54,9 @@
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-vector-icons": "6.4.1",
     "react-redux": "^6.0.0",
-    "redux": "^3.7.2"
+    "react-test-renderer": "16.8.3",
+    "redux": "^3.7.2",
+    "typescript": "^3.5.3"
   },
   "jest": {
     "preset": "react-native"

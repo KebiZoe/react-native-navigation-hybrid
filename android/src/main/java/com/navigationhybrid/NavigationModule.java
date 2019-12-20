@@ -111,20 +111,23 @@ public class NavigationModule extends ReactContextBaseJavaModule {
                 return;
             }
 
+            if (bridgeManager.getPendingTag() != 0) {
+                throw new IllegalStateException("The previous `setRoot` has not been processed yet, you should `await Navigator.setRoot()` to complete.");
+            }
+
             bridgeManager.setViewHierarchyReady(false);
-            bridgeManager.setRootLayout(layout, sticky, tag);
+            bridgeManager.setRootLayout(layout, sticky);
             Activity activity = getCurrentActivity();
             if (activity instanceof ReactAppCompatActivity && bridgeManager.isReactModuleRegisterCompleted()) {
                 ReactAppCompatActivity reactAppCompatActivity = (ReactAppCompatActivity) activity;
                 AwesomeFragment fragment = bridgeManager.createFragment(layout);
-                bridgeManager.setPendingLayout(null);
                 if (fragment != null) {
                     FLog.i(TAG, "have active activity and react module was registered, set root directly");
-                    reactAppCompatActivity.setActivityRootFragment(fragment);
+                    reactAppCompatActivity.setActivityRootFragment(fragment, tag);
                 }
             } else {
                 FLog.w(TAG, "have no active activity or react module was not registered, schedule pending root");
-                bridgeManager.setPendingLayout(layout);
+                bridgeManager.setPendingLayout(layout, tag);
             }
         });
     }

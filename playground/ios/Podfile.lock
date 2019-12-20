@@ -8,7 +8,7 @@ PODS:
   - glog (0.3.5)
   - HudHybrid (0.42.0):
     - React
-  - NavigationHybrid (0.16.9):
+  - NavigationHybrid (0.16.14):
     - React
   - React (0.59.10):
     - React/Core (= 0.59.10)
@@ -92,7 +92,7 @@ DEPENDENCIES:
   - yoga (from `../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - boost-for-react-native
 
 EXTERNAL SOURCES:
@@ -119,11 +119,11 @@ SPEC CHECKSUMS:
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   HudHybrid: e8bffd3e35a4ee5ff36a4ba5e81fd9a7661c2767
-  NavigationHybrid: 973a2a3383504f7903d08712c031b468b6caee35
+  NavigationHybrid: 1d59608632d78b3f79a8bb54cc6917800d919d3c
   React: 36d0768f9e93be2473b37e7fa64f92c1d5341eef
   RNVectorIcons: 09d03dfe7c9fc158c3dce50d891101637d428bb3
   yoga: 684513b14b03201579ba3cee20218c9d1298b0cc
 
-PODFILE CHECKSUM: 1fbfb49a0d6cf34a163a9bf1e46645b9b46d2d55
+PODFILE CHECKSUM: d5fc3d51985e6d4222080d14c48b8f39c9a8c813
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

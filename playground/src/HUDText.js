@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Text, View, TouchableOpacity } from 'react-native';
-import styles from './Styles';
-import HUD, { LoadingHUD } from 'react-native-hud-hybrid';
+import { Text, View, TouchableOpacity } from 'react-native'
+import styles from './Styles'
+import HUD, { LoadingHUD } from 'react-native-hud-hybrid'
 
 export default class HUDTest extends Component {
   constructor(props) {
-    super(props);
-    this.loading = this.loading.bind(this);
+    super(props)
+    this.loading = this.loading.bind(this)
   }
 
   componentDidMount() {
@@ -20,12 +20,12 @@ export default class HUDTest extends Component {
       // minShowTime: 800,
       // dimAmount: 0.0, // only for andriod
       loadingText: 'Loading...',
-    });
-    this.loadingHud = new LoadingHUD();
+    })
+    this.loadingHud = new LoadingHUD()
   }
 
   componentWillUnmount() {
-    this.loadingHud.hideAll();
+    this.loadingHud.hideAll()
   }
 
   loading() {
@@ -35,27 +35,27 @@ export default class HUDTest extends Component {
     //   new HUD().done('Work is Done!').hideDelayDefault();
     // }, 2000);
 
-    const hud = HUD.spinner();
+    const hud = HUD.spinner()
     setTimeout(() => {
-      hud.text('Ho Ho Ho');
-      hud.hideDelayDefault();
-    }, 2000);
+      hud.text('Ho Ho Ho')
+      hud.hideDelayDefault()
+    }, 2000)
   }
 
   text() {
-    HUD.text('Hello World!!');
+    HUD.text('Hello World!!')
   }
 
   info() {
-    HUD.info('A message to you.');
+    HUD.info('A message to you.')
   }
 
   done() {
-    HUD.done('Work is Done!');
+    HUD.done('Work is Done!')
   }
 
   error() {
-    HUD.error('Somthing Wrong!');
+    HUD.error('Somthing Wrong!')
   }
 
   render() {
@@ -81,6 +81,6 @@ export default class HUDTest extends Component {
           <Text style={styles.buttonText}> error </Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }

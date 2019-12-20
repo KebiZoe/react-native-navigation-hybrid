@@ -183,21 +183,21 @@
      objc_setAssociatedObject(self, @selector(hbd_swipeBackEnabled), @(enabled), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (BOOL)hbd_extendedLayoutIncludesTopBar {
-    id obj = objc_getAssociatedObject(self, _cmd);
-    return obj ? [obj boolValue] : NO;
-}
-
-- (void)setHbd_extendedLayoutIncludesTopBar:(BOOL)includesTopBar {
-     objc_setAssociatedObject(self, @selector(hbd_extendedLayoutIncludesTopBar), @(includesTopBar), OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
 - (UIBarButtonItem *)hbd_backBarButtonItem {
     return objc_getAssociatedObject(self, _cmd);
 }
 
 - (void)setHbd_backBarButtonItem:(UIBarButtonItem *)backBarButtonItem {
     objc_setAssociatedObject(self, @selector(hbd_backBarButtonItem), backBarButtonItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)hbd_extendedLayoutDidSet {
+    id obj = objc_getAssociatedObject(self, _cmd);
+    return obj ? [obj boolValue] : NO;
+}
+
+- (void)setHbd_extendedLayoutDidSet:(BOOL)didSet {
+    objc_setAssociatedObject(self, @selector(hbd_extendedLayoutDidSet), @(didSet), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (void)hbd_setNeedsUpdateNavigationBar {

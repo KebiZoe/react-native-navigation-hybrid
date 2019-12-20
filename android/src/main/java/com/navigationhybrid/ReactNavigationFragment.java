@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import me.listenzz.navigation.AwesomeFragment;
 import me.listenzz.navigation.NavigationFragment;
+import me.listenzz.navigation.TabBarItem;
 
 /**
  * Created by Listen on 2018/1/15.
@@ -23,7 +24,10 @@ public class ReactNavigationFragment extends NavigationFragment {
         super.setRootFragment(fragment);
         if (fragment instanceof HybridFragment) {
             HybridFragment hybridFragment = (HybridFragment) fragment;
-            setTabBarItem(hybridFragment.getTabBarItem());
+            TabBarItem tabBarItem = hybridFragment.getTabBarItem();
+            if (tabBarItem != null) {
+                setTabBarItem(tabBarItem);
+            }
         }
     }
 
